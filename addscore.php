@@ -25,6 +25,7 @@
       if ((($screenshot_type == 'image/gif') || ($screenshot_type == 'image/jpeg') || ($screenshot_type == 'image/pjpeg') || ($screenshot_type == 'image/png'))        && ($screenshot_size > 0) && ($screenshot_size <= GW_MAXFILESIZE)) {
         if ($_FILES['screenshot']['error'] == 0) {          // Move the file to the target upload folder
           $target = GW_UPLOADPATH . $screenshot;
+   
           if (move_uploaded_file($_FILES['screenshot']['tmp_name'], $target)) {
             // Connect to the database
             $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -54,7 +55,7 @@
       }      else {        echo '<p class="error">The screen shot must be a GIF, JPEG, or PNG image file no greater than ' . (GW_MAXFILESIZE / 1024) . ' KB in size.</p>';      }
 
       // Try to delete the temporary screen shot image file
-      @unlink($_FILES['screenshot']['tmp_name']);
+        @unlink($_FILES['screenshot']['tmp_name']);
     }
     else {
       echo '<p class="error">Please enter all of the information to add your high score.</p>';
